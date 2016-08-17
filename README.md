@@ -1,4 +1,4 @@
-# sails-swagger
+# sails-magik-swagger
 
 [![NPM version][npm-image]][npm-url]
 [![Build status][ci-image]][ci-url]
@@ -11,7 +11,7 @@
 ## Install
 
 ```sh
-$ npm install sails-swagger --save
+$ npm install sails-magik-swagger --save
 ```
 
 ## Configuration
@@ -23,7 +23,7 @@ module.exports.swagger = {
    */
   pkg: require('../package'),
   ui: {
-    url: 'http://swagger.balderdash.io'
+    url: 'http://swagger.magikevolution.com'
   }
 };
 ```
@@ -67,13 +67,13 @@ module.exports.routes = {
      * for configuration options and examples.                                  *
      *                                                                          *
      ***************************************************************************/
-    'get /groups/:id': {
-        controller: 'GroupController',
+    'GET /groups/:id': {
+        controller: 'Group',
         action: 'test',
         skipAssets: 'true',
         //swagger path object
         swagger: {
-            methods: ['GET', 'POST'],
+            methods: ['GET'],
             summary: ' Get Groups ',
             description: 'Get Groups Description',
             produces: [
@@ -90,38 +90,40 @@ module.exports.routes = {
                 }
             },
             parameters: []
-
         }
     },
-    'put /groups/:id': {
-        controller: 'GroupController',
-        action: 'test',
-        skipAssets: 'true',
-        //swagger path object
-        swagger: {
-            methods: ['PUT', 'POST'],
-            summary: 'Update Groups ',
-            description: 'Update Groups Description',
-            produces: [
-                'application/json'
-            ],
-            tags: [
-                'Groups'
-            ],
-            responses: {
-                '200': {
-                    description: 'Updated Group',
-                    schema: 'Group' // api/model/Group.js
-                }
-            },
-            parameters: [
-                'Group' // api/model/Group.js
-            ]
 
+    'POST /api/products': {
+    controller: 'products',
+    action: 'create',
+    swagger: {
+      methods: ['POST'],
+      summary: 'Create Products',
+      description: 'Create Products using....',
+      produces: [
+        'application/json'
+      ],
+      tags: [
+        'Products'
+      ],
+      responses: {
+        '201': {
+          description: 'Product created',
+          schema: 'products'
         }
+      },
+      parameters: [
+        {
+          "name": "$product",
+          "in": "body",
+          "description": "Product object to insert",
+          "required": true,
+          "schema": { $ref: '#/definitions/products' } // this links to products model 
+        }
+      ]
     }
+  }
 };
-
 
 ```
 
@@ -129,15 +131,9 @@ module.exports.routes = {
 MIT
 
 ## Maintained By
-[<img src='http://i.imgur.com/Y03Jgmf.png' height='64px'>](http://langa.io)
+[<img src='http://www.magikevolution.com/img/logos/bola.png' height='64px'>](http://magikevolution.com)
 
-[sails-version-image]: https://goo.gl/gTUV5x
 [sails-url]: http://sailsjs.org
 [npm-image]: https://img.shields.io/npm/v/sails-swagger.svg?style=flat
-[npm-url]: https://npmjs.org/package/sails-swagger
-[ci-image]: https://img.shields.io/travis/langateam/sails-swagger/master.svg?style=flat
-[ci-url]: https://travis-ci.org/langateam/sails-swagger
-[daviddm-image]: http://img.shields.io/david/langateam/sails-swagger.svg?style=flat
-[daviddm-url]: https://david-dm.org/langateam/sails-swagger
-[codeclimate-image]: https://img.shields.io/codeclimate/github/langateam/sails-swagger.svg?style=flat
-[codeclimate-url]: https://codeclimate.com/github/langateam/sails-swagger
+[npm-url]: https://npmjs.org/package/sails-magik-swagger
+
