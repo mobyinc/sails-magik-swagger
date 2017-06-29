@@ -64,6 +64,8 @@ var Transformer = {
         return {
             swagger: '2.0',
             info: Transformer.getInfo(pkg),
+            securityDefinitions: Transformer.getSecurityDefinitions(pkg),
+            security: Transformer.getSecurity(pkg),
             host: sails.config.swagger.host,
             tags: Transformer.getTags(sails),
             definitions: Transformer.getDefinitions(sails),
@@ -86,6 +88,22 @@ var Transformer = {
 
             'license.name': 'license'
         });
+    },
+
+    getSecurityDefinitions: function getSecurityDefinitions(pkg) {
+        return {
+            "Token": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            }
+        };
+    },
+
+    getSecurity: function getSecurity(pkg) {
+        return [{
+            "Token": []
+        }];
     },
 
     /**
